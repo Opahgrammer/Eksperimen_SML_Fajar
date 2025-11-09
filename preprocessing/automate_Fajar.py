@@ -1,3 +1,4 @@
+import argparse
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
@@ -24,13 +25,11 @@ def preprocess_data(input_path, output_path):
     # ======================================================
     # 3. Menangani Missing Values
     # ======================================================
-    # Numerik → isi dengan median
     num_cols = ['trestbps', 'chol', 'thalch', 'oldpeak', 'ca']
     for col in num_cols:
         if col in df.columns:
             df[col] = df[col].fillna(df[col].median())
 
-    # Kategorikal → isi dengan modus
     cat_cols = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal']
     for col in cat_cols:
         if col in df.columns:
@@ -48,12 +47,10 @@ def preprocess_data(input_path, output_path):
     # ======================================================
     # 5. Encoding Fitur Kategorikal
     # ======================================================
-    # Label Encoding untuk kolom ordinal
     le = LabelEncoder()
     if 'slope' in df.columns:
         df['slope'] = le.fit_transform(df['slope'])
 
-    # One-Hot Encoding untuk kolom kategorikal nominal
     one_hot_cols = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'thal']
     df = pd.get_dummies(df, columns=[col for col in one_hot_cols if col in df.columns], drop_first=True)
 
@@ -64,7 +61,7 @@ def preprocess_data(input_path, output_path):
     # ======================================================
     num_features = ['age', 'trestbps', 'chol', 'thalch', 'oldpeak', 'ca']
     existing_num_features = [col for col in num_features if col in df.columns]
-    
+
     Q1 = df[existing_num_features].quantile(0.25)
     Q3 = df[existing_num_features].quantile(0.75)
     IQR = Q3 - Q1
@@ -110,11 +107,15 @@ def preprocess_data(input_path, output_path):
 
 
 # ======================================================
-# Eksekusi Langsung Jika File Dijalankan
+# Main - Mendukung Argumen CLI (--input dan --output)
 # ======================================================
 if __name__ == "__main__":
-    input_path = "../heart_disease_uci_raw/heart_disease_uci.csv"
-    output_path = "../preprocessing/heart_disease_uci_preprocessing.csv"
-    df_cleaned = preprocess_data(input_path, output_path)
+    parser = argparse.ArgumentParser(description="Automated preprocessing for heart disease dataset")
+    parser.add_argument("--input", type=str, required=False, default="../heart_disease_uci_raw/heart_disease_uci.csv", help="Path dataset input")
+    parser.add_argument("--output", type=str, required=False, default="../preprocessing/heart_disease_uci_preprocessing.csv", help="Path dataset output")
+    args = parser.parse_args()
+
+    df_cleaned = preprocess_data(args.input, args.output)
+
     print("\nPreview dataset hasil preprocessing:")
     print(df_cleaned.head())
