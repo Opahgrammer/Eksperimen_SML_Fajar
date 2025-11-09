@@ -1,0 +1,76 @@
+name: Heart Disease Data Preprocessing Workflow
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "heart_disease_uci_raw/**"
+      - "preprocessing/**"
+      - ".github/workflows/preprocess.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "heart_disease_uci_raw/**"
+      - "preprocessing/**"
+  workflow_dispatch: # Manual trigger via GitHub UI
+  schedule:
+    # Jalankan otomatis tiap hari jam 00:00 UTC (opsional)
+    - cron: "0 0 * * *"
+
+jobs:
+  preprocess-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Ambil kode dari repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup environment Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: "pip"
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy scikit-learn
+
+      # 4️⃣ Jalankan script preprocessing
+      - name: Run preprocessing script
+        run: |
+          cd preprocessing
+          python automate_Fajar.py --input ../heart_disease_uci_raw/heart_disease_uci.csv --output ../preprocessing/heart_disease_uci_preprocessing.csv
+
+      # 5️⃣ Cek apakah hasil preprocessing sudah dibuat
+      - name: Check preprocessing output
+        run: |
+          if [ -f preprocessing/heart_disease_uci_preprocessing.csv ]; then
+            echo "✅ Dataset hasil preprocessing berhasil dibuat."
+            ls -lh preprocessing/heart_disease_uci_preprocessing.csv
+          else
+            echo "❌ Gagal menemukan file hasil preprocessing."
+            exit 1
+          fi
+
+      # 6️⃣ Upload hasil preprocessing sebagai artifact
+      - name: Upload preprocessing artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: heart-disease-preprocessing
+          path: preprocessing/heart_disease_uci_preprocessing.csv
+          retention-days: 30
+
+      # 7️⃣ Tampilkan ringkasan hasil di GitHub Actions Summary
+      - name: Display preprocessing summary
+        run: |
+          echo "## 🧠 Heart Disease Preprocessing Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Dataset preprocessing selesai dan berhasil dibuat!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Lokasi file:** \`preprocessing/heart_disease_uci_preprocessing.csv\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Dataset preprocessing juga disimpan sebagai artifact yang bisa diunduh dari hasil Actions run." >> $GITHUB_STEP_SUMMARY
