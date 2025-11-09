@@ -6,7 +6,7 @@ on:
     paths:
       - "heart_disease_uci_raw/**"
       - "preprocessing/**"
-      - ".github/workflows/preprocess.yml"
+      - ".github/workflows/preprocessing.yml"
   pull_request:
     branches: [main, master]
     paths:
