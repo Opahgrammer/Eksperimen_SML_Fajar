@@ -1,0 +1,10 @@
+artifact_location: file:///D:/SUBMISSION-ML/Eksperimen_SML_Fajar/Membangun_model/mlruns/345331428983303893/models/m-869133761b5c4c88b2f7fab1cfcc5243/artifacts
+creation_timestamp: 1762759232226
+experiment_id: '345331428983303893'
+last_updated_timestamp: 1762759251292
+model_id: m-869133761b5c4c88b2f7fab1cfcc5243
+model_type: null
+name: model
+source_run_id: 9e79e0bad49b4ce8a875402c2849ac1b
+status: 2
+status_message: null

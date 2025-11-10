@@ -1,0 +1,41 @@
+artifact_path: file:///D:/SUBMISSION-ML/Eksperimen_SML_Fajar/Membangun_model/mlruns/345331428983303893/models/m-869133761b5c4c88b2f7fab1cfcc5243/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.2
+is_signature_from_type_hint: false
+mlflow_version: 3.6.0
+model_id: m-869133761b5c4c88b2f7fab1cfcc5243
+model_size_bytes: 2618033
+model_uuid: m-869133761b5c4c88b2f7fab1cfcc5243
+prompts: null
+run_id: 9e79e0bad49b4ce8a875402c2849ac1b
+signature:
+  inputs: '[{"type": "double", "name": "age", "required": true}, {"type": "double",
+    "name": "trestbps", "required": true}, {"type": "double", "name": "chol", "required":
+    true}, {"type": "double", "name": "thalch", "required": true}, {"type": "double",
+    "name": "oldpeak", "required": true}, {"type": "long", "name": "slope", "required":
+    true}, {"type": "double", "name": "ca", "required": true}, {"type": "boolean",
+    "name": "sex_Male", "required": true}, {"type": "boolean", "name": "cp_atypical
+    angina", "required": true}, {"type": "boolean", "name": "cp_non-anginal", "required":
+    true}, {"type": "boolean", "name": "cp_typical angina", "required": true}, {"type":
+    "boolean", "name": "fbs_True", "required": true}, {"type": "boolean", "name":
+    "restecg_normal", "required": true}, {"type": "boolean", "name": "restecg_st-t
+    abnormality", "required": true}, {"type": "boolean", "name": "exang_True", "required":
+    true}, {"type": "boolean", "name": "thal_normal", "required": true}, {"type":
+    "boolean", "name": "thal_reversable defect", "required": true}, {"type": "integer",
+    "name": "age_group", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-11-10 07:20:32.312517'

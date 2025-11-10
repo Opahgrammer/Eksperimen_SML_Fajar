@@ -1,0 +1,20 @@
+digest: d5ad3ea7
+name: dataset
+profile: '{"num_rows": 118, "num_elements": 2124}'
+schema: '{"mlflow_colspec": [{"type": "double", "name": "age", "required": true},
+  {"type": "double", "name": "trestbps", "required": true}, {"type": "double", "name":
+  "chol", "required": true}, {"type": "double", "name": "thalch", "required": true},
+  {"type": "double", "name": "oldpeak", "required": true}, {"type": "long", "name":
+  "slope", "required": true}, {"type": "double", "name": "ca", "required": true},
+  {"type": "boolean", "name": "sex_Male", "required": true}, {"type": "boolean", "name":
+  "cp_atypical angina", "required": true}, {"type": "boolean", "name": "cp_non-anginal",
+  "required": true}, {"type": "boolean", "name": "cp_typical angina", "required":
+  true}, {"type": "boolean", "name": "fbs_True", "required": true}, {"type": "boolean",
+  "name": "restecg_normal", "required": true}, {"type": "boolean", "name": "restecg_st-t
+  abnormality", "required": true}, {"type": "boolean", "name": "exang_True", "required":
+  true}, {"type": "boolean", "name": "thal_normal", "required": true}, {"type": "boolean",
+  "name": "thal_reversable defect", "required": true}, {"type": "integer", "name":
+  "age_group", "required": true}]}'
+source: '{"tags": {"mlflow.user": "ASUS ROG Strix", "mlflow.source.name": "modelling.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "e831c380ec11c42f0a3c91d09b4f9c9d8276487a"}}'
+source_type: code
